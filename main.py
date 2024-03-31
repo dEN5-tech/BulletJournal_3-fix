@@ -331,9 +331,15 @@ class PlannerApp():
         scale_factor = 1.1 if event.delta > 0 else 0.9
         self.canvas.scale(arrow_id, event.x, event.y, scale_factor, scale_factor)
 
+def on_closing(root):
+    if messagebox.askokcancel("Quit",
+        "Do you want to quit?"):
+        root.destroy()
+
 
 def main():
     root = customtkinter.CTk()
+    root.protocol("WM_DELETE_WINDOW", lambda: on_closing(root))
     root.geometry("1000x500")  # Устанавливаем начальный размер окна
     app = PlannerApp(root)
     root.mainloop()
